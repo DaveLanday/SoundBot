@@ -3,9 +3,9 @@
  
 #search_sounds.py
 #Dave Landay
-#LAST UPDATED: 03-29-2020
+#LAST UPDATED: 04-07-2020
 
-import urllib3
+import requests
 from bs4 import BeautifulSoup as bs
 
 def make_parser(url):
@@ -17,14 +17,12 @@ def make_parser(url):
 
         returns: parser (bs4 object): Beautiful Soup object.
     """
-    # Create pool manager (urllib3 ensures thread safety if we need it in future for some reason):
-    http = urllib3.PoolManager()
 
     # Make a `GET` request to obtain the html:
-    req = http.request('GET', url)
+    req = requests.get(url)
 
     # Create parser:
-    parser = bs(req.data)
+    parser = bs(req.text)
 
     return parser
 
@@ -40,51 +38,48 @@ def search(keyword):
                                  search url.
     """
 
-    api_call = '/search.aspx?keyword={}'.format(keyword)
+    api_call = '/https://www.soundboard.com/search.aspx?keyword={}'.format(keyword)
     return api_call
 
-def get_spans(parser):
+def get_board_from_search(keyword):
     """
-        GET_SPANS: Wrapper around parser.find_all() to get the 
-                   `<span><\span>` tags of the html being parsed.
+        GET_BOARD_FROM_SEARCH: Gets the links to various soundboads associated with a keyword.
+
+        param: keyword (str): A string representing the keyword
+                              or search criteria.
+        returns: board_info (dict): A dictionary of soundboards retrieved from a search and their 
+                                    meta-information. This includes board title and the boards url.
+    """
+    # Get the search url:
+    search_url = search(keyword)
+    
+    # Make the search:
+    new_parser = make_parser(search_url)
+
+    # Get a list of sound board links:
+    board_list = new_parser.find_all('div', {'class':'item_boards col-xs-6'})
+    a_tags = [d.find('a') for d in board_list]
+    
+    board_info = {idx: {'title': a.attrs['title'], 'href': 'https://www.soundboard.com' + a.attrs['href']} for idx, a in enumerate(a_tags)}
+    
+    # * ADD MORE META_DATA AS NEEDED BELOW ...
+
+    return board_info
+
+def get_meta_data(parser):
+    """
+        GET_META_DATA: Obtains meta-data about the soundboard.
 
         param: parser (bs4 object): See `make_parser`.
+    """
+    # Parse the meta string:
+    meta_str = parser.find('div',{'class': 'content_details col-xs-10'}).text
+    meta_list = meta_str.split('\n')[1:-1]
     
-        returns: span_tags (list): List of all `<span><\span>` tags
-                                   present in the html.
-    """
-    span_tags = parser.find_all('span')
-    return span_tags
+    # Turn into dictionary:
+    mata_data = {t.split(':')[0]: t.split(':')[1] for t in meta_list}
 
-def get_track_names(span_tags):
-    """
-        GET_TRACK_NAMES: Once a soundboard is selected, this function
-                         retrieves the track titles of the streamable
-                         sounds.
-        
-        param: span_tags (list): A list of <class 'bs4.element.Tag'> objects.
-                                 Specifically, a list of all the <span><\span>
-                                 tags in the html that is being parsed.
-        
-        returns: (track_list,  meta_data) (tuple): A tuple of lists containing track titles
-                                                   and metadata related to the soundboard.
-    """
-
-    # List of tracks and available metadata:
-    track_list = []
-    meta_data  = []
-    for idx, i in enumerate(span_tags):
-        if not i.attrs:
-            track_list.append(i.text)
-    
-    # Get the metadata:
-    meta_data = track_list[:5]
-
-    # Remove repeated track names or empty strings:
-    track_list = list(filter(None, track_list[5:]))
-    track_list = list(set(track_list))
-
-    return (track_list, meta_data)
+    return meta_data
 
 def check_license_personal(meta_data):
     """
@@ -97,10 +92,48 @@ def check_license_personal(meta_data):
         
         returns: personal (bool): A boolean describing  
     """
-
-    if meta_data[3].split(': ')[1] == 'PERSONAL':
-        personal = True
-    else:
-        personal = False
+    
+    try:
+        if meta_data['RIGHTS'] == 'PERSONAL':
+            personal = True
+        else:
+            personal = False
+    except KeyError:
+        print('No Meta Data Found')
+        personal = None
 
     return personal
+
+def get_audio_link(data_track_id):
+    """
+        GET_AUDIO_TAG: Retrives the link to the audio. This will help us do things like
+                       Change the track and play the right sound.
+
+        param: data_track_id (str): A string that encodes the track location.
+               (See: track.attrs['data-track-id'])
+
+        returns: audio_link (str): A string ripped from the <audio> tag in the html.
+    """
+    audio_link = 'https://www.soundboard.com/handler/playTrack.ashx?id=' + data_track_id
+    return audio_link
+
+def get_tracks(parser):
+    """
+        GET_TRACKS: Gets the tracks and ids that inform how to play them.
+
+        param: parser (bs4 object): See `make_parser`.
+
+        returns: track_list (dict): A dictionary keyed by track title. The values are a dictionary
+                                    of meta-information including track number, data-track-id, and
+                                    the link for the jquery handler to play the sound.
+    """
+    # Get the <a> tags containing the relevant information:
+    tracks = parser.find_all('a', {'href': 'javascript:void(0)'})
+
+    # Make a new dictionary of only the relevant information:
+    track_list = {idx: {'title':track.attrs['title'],
+        'track_number': track.attrs['id'][7:],
+        'data-track-id': track.attrs['data-track-id'],
+        'play_link': get_audio_link(track.attrs['data-track-id'])} for idx,track in enumerate(tracks)}
+
+    return track_list
