@@ -3,7 +3,7 @@ A bot for discord that loads soundboards
 
 # Setup:
 
-1 virtual environment:
+1 run virtual environment:
 
 ``` source bin/activate```
 
