@@ -7,7 +7,7 @@
 
 from setuptools import setup, find_packages
 
-ith open('requirements.txt', 'r') as f:
+with open('requirements.txt', 'r') as f:
     required = f.read().splitlines()
 
 setup(version='1.0.0',

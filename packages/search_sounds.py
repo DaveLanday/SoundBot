@@ -22,7 +22,7 @@ def make_parser(url):
     req = requests.get(url)
 
     # Create parser:
-    parser = bs(req.text)
+    parser = bs(req.text, features='html.parser')
 
     return parser
 
@@ -38,7 +38,7 @@ def search(keyword):
                                  search url.
     """
 
-    api_call = '/https://www.soundboard.com/search.aspx?keyword={}'.format(keyword)
+    api_call = 'https://www.soundboard.com/search.aspx?keyword={}'.format(keyword)
     return api_call
 
 def get_board_from_search(keyword):
@@ -77,7 +77,7 @@ def get_meta_data(parser):
     meta_list = meta_str.split('\n')[1:-1]
     
     # Turn into dictionary:
-    mata_data = {t.split(':')[0]: t.split(':')[1] for t in meta_list}
+    meta_data = {t.split(':')[0]: t.split(':')[1] for t in meta_list}
 
     return meta_data
 
