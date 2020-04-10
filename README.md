@@ -25,12 +25,14 @@ python duke_nukem.py
  
  1 Figure out pagination after search (so far can only scrape the 1st page)
  
- 2 Build pipeline to get the data objects we need with python, save dictionaries as json objects,
+ 2 ~~Build pipeline to get the data objects we need with python~~, pass dictionaries as json objects to JS ...
  
- 3 use javascript to use those dictionaries to make requests.
+ 3 use JS to use those dictionaries to make requests.
  
- 4 Front End
+ 4 Front End design and functionality
  
  5 Host bot on Heroku and/or Zeit
  
  6 Connect bot to discord
+ 
+ 7 Impress Chris, Graeme, Fran, Danny, and Kyle!
