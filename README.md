@@ -11,15 +11,24 @@ A bot for discord that loads soundboards
 
 ``` python setup.py install ```
 
+3 install node modules
+
+``` npm install --prefix ./SoundBot/ ```
+
+ or
+ 
+``` 
+ cd SoundBot
+ npm install
+```
+
 #### Examples:
 
 play with example script to see how to print dictionary of soundboards and soundboard tracklist:
 
 ```
-cd examples
-
-python duke_nukem.py
-
+ cd SoundBot/examples
+ python duke_nukem.py
 ```
 # TODO:
  
