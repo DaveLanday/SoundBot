@@ -1,0 +1,32 @@
+{
+  "name": "soundboard",
+  "version": "1.0.0",
+  "description": "A bot for discord that let's users search for sounboards and play audio clips to their server.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaveLanday/SoundBot.git"
+  },
+  "keywords": [
+    "soundBot",
+    "soundBoard",
+    "SoundBot"
+  ],
+  "author": "Dave Landay, Caio Ingber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaveLanday/SoundBot/issues"
+  },
+  "homepage": "https://github.com/DaveLanday/SoundBot#readme",
+  "dependencies": {
+    "discord.js": "^12.1.1",
+    "express": "^4.17.1"
+  }
+}
