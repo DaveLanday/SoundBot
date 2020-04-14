@@ -12,9 +12,7 @@ A bot for discord that loads soundboards
 ``` python setup.py install ```
 
 3 install node modules
-``` 
-cd SoundBot
-
+``` cd SoundBot
 npm install
 ```
 
