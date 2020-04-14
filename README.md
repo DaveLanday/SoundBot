@@ -12,7 +12,8 @@ A bot for discord that loads soundboards
 ``` python setup.py install ```
 
 3 install node modules
-``` cd SoundBot
+``` 
+cd SoundBot
 npm install
 ```
 
@@ -22,9 +23,7 @@ play with example script to see how to print dictionary of soundboards and sound
 
 ```
 cd SoundBot/examples
-
 python duke_nukem.py
-
 ```
 # TODO:
  
