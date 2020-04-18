@@ -13,7 +13,13 @@ config({
 // What happens when the bot starts?:
 client.on("ready", () => { 
 	console.log(`Bot launched. Hello, my name is ${client.user.username}. I pass butter and play soundboards.`);
-	// client.user.setActivity(`Serving ${client.guilds.size} servers`);
+	client.user.setPresence({
+		status: 'online',
+		game: {
+			name: 'In Development',
+			type: 'WATCHING'
+		}
+	});
 });
 
 // Login using bot creds:
