@@ -6,6 +6,8 @@ const command_table = new ascii('List of Commands').setHeading('Command', 'Load 
 
 module.exports = (client) => {
 	readdirSync('./commands/').forEach(dir => {
+		
+		// Only work on items that are directories:
 		if (lstatSync('./commands/'+dir).isDirectory()) {
 			const commands = readdirSync(`./commands/${dir}/`).filter(f =>f.endsWith('.js'));
 
@@ -26,4 +28,5 @@ module.exports = (client) => {
 		}
 	});
 	console.log(command_table.toString());
+	console.log(client.commands.get('pong'));
 }

@@ -1,5 +1,5 @@
 // Load discord library:
-const { Client, RichEmbed, Collection } = require("discord.js");
+const { Client, MessageEmbed, Collection } = require("discord.js");
 
 // Load Configs:
 const { config } = require("dotenv");
