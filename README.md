@@ -30,6 +30,11 @@ play with example script to see how to print dictionary of soundboards and sound
  cd SoundBot/examples
  python duke_nukem.py
 ```
+
+#### Commands:
+
+Add bot commands to the commands directory within the `SoundBot` project directory. Include a description of the module in the `README.md` file. This will inform developers where to place commands that fall under the same "umbrella" of functionality.
+
 # TODO:
  
  1 Figure out pagination after search (so far can only scrape the 1st page)
