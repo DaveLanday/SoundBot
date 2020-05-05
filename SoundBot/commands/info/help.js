@@ -16,6 +16,7 @@ module.exports = {
 		if (Array.isArray(args) && args.length) {
 			console.log("Arguments passed to help function:", args);
 			
+			console.log(`${message.member.user.tag} is requesting information on the following commands: ${args.toString()}`);
 			let msg = await message.channel.send(`Here is info for these commands: ${args.toString()}`)
 			// Try to parse the arguments if they are legitimate commands:
 			for (let a of args) {
@@ -33,7 +34,7 @@ module.exports = {
 					message.channel.send({ embed: helpstring });
 				}
 				
-				else {
+				else {	
 					const helpstring = new MessageEmbed()
 						.setColor(embed_color)
 						//.attachFiles(thumbnail_route)
@@ -49,6 +50,7 @@ module.exports = {
 
 		// Otherwise, return the documentation for all the commands available to SoundBot:
 		else {
+			console.log(`${message.member.user.tag} is requesting info on the general set of commands`);
 			let msg = await message.channel.send('Here\'s a list of things you can ask me ...')
 			const helpstring = new MessageEmbed()
 				.setColor(embed_color)
