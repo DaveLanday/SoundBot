@@ -9,8 +9,9 @@ function handleSearch(keyword) {
 	var list_sounds = new PythonShell('handleSearch.py', options);
 
 	list_sounds.on('message', function (message) {
-		console.log(JSON.parse(message))
+		let bl = JSON.parse(message);
 	});
+	return bl;
 }
 module.exports = {
 	name: "search",
@@ -33,7 +34,8 @@ module.exports = {
 			message.author.send("Here\'s something you\'re really gonna like ...");
 		}
 
-		// Send search results to console:
-		handleSearch(args);
+		// Send search results to discord:
+		board_list = handleSearch(args);
+
 	}
 }
