@@ -28,5 +28,4 @@ module.exports = (client) => {
 		}
 	});
 	console.log(command_table.toString());
-	console.log(client.commands.get('pong'));
 }

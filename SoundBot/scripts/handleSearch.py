@@ -17,7 +17,7 @@ def main():
     if len(keyword) > 1:
         keyword = ' '.join(keyword)
     elif len(keyword) == 1:
-        keyword = args.k
+        keyword = args.k[0]
     else:
         return
     search_results = json.dumps(find_boards(keyword))

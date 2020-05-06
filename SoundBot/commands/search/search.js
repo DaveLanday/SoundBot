@@ -6,7 +6,6 @@ function handleSearch(keyword) {
 		scriptPath:'/Users/davidlanday/Documents/soundBoard/SoundBot/scripts',
 		args:[keyword]
 	};
-	// pythonPath:'../../../lib/python3.7',
 	var list_sounds = new PythonShell('handleSearch.py', options);
 
 	list_sounds.on('message', function (message) {
@@ -22,7 +21,7 @@ module.exports = {
 		
 		// If Keyword argument is given by user, then make the specified search:
 		if (Array.isArray(args) && args.length == 1) {
-			const msg = message.author.send(`Searching for sounboards related to ${args.toString()} ...`);
+			const msg = message.author.send(`Searching for soundboards related to ${args.toString()} ...`);
 			
 			// Show soundboards ...
 		}
