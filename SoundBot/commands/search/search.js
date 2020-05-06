@@ -1,4 +1,18 @@
 const { MessageEmbed, MessageAttachment } = require('discord.js');
+const { PythonShell } = require('python-shell');
+function handleSearch(keyword) {
+	var options = {
+		mode: 'text',
+		scriptPath:'/Users/davidlanday/Documents/soundBoard/SoundBot/scripts',
+		args:[keyword]
+	};
+	// pythonPath:'../../../lib/python3.7',
+	var list_sounds = new PythonShell('handleSearch.py', options);
+
+	list_sounds.on('message', function (message) {
+		console.log(JSON.parse(message))
+	});
+}
 module.exports = {
 	name: "search",
 	category:"search",
@@ -9,6 +23,7 @@ module.exports = {
 		// If Keyword argument is given by user, then make the specified search:
 		if (Array.isArray(args) && args.length == 1) {
 			const msg = message.author.send(`Searching for sounboards related to ${args.toString()} ...`);
+			
 			// Show soundboards ...
 		}
 		else if (Array.isArray(args) && args.length > 1) {
@@ -18,5 +33,8 @@ module.exports = {
 		else {
 			message.author.send("Here\'s something you\'re really gonna like ...");
 		}
+
+		// Send search results to console:
+		handleSearch(args);
 	}
 }

@@ -3,10 +3,9 @@
  
 #scrape_sound.py
 #Dave Landay
-#LAST UPDATED: 04-09-2020
-import sys
-sys.path.insert(1, '../scripts/modules')
-import search_sounds
+#LAST UPDATED: 05-05-2020
+
+from modules import search_sounds
 
 def find_boards(keyword):
     """
