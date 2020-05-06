@@ -60,7 +60,9 @@ def get_board_from_search(keyword):
     board_list = new_parser.find_all('div', {'class':'item_boards col-xs-6'})
     a_tags = [d.find('a') for d in board_list]
     
-    board_info = {idx: {'title': a.attrs['title'], 'href': 'https://www.soundboard.com' + a.attrs['href']} for idx, a in enumerate(a_tags)}
+    board_info = {idx: {'title': a.attrs['title'],
+                        'href': 'https://www.soundboard.com' + a.attrs['href'], 
+                        'img': list(a.find('img').attrs.values())[0]} for idx, a in enumerate(a_tags)}
     
     # * ADD MORE META_DATA AS NEEDED BELOW ...
 
