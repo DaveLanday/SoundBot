@@ -1,17 +1,24 @@
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 const { PythonShell } = require('python-shell');
 var board_list;
-function handleSearch(keyword) {
+function handleSearch(keyword, message) {
 	var options = {
 		mode: 'text',
 		scriptPath:'/Users/davidlanday/Documents/soundBoard/SoundBot/scripts',
 		args:[keyword]
 	};
-	var list_sounds = new PythonShell('handleSearch.py', options);
+	//var list_sounds = new PythonShell('handleSearch.py', options);
 
-	list_sounds.on('message', function (message) {
-		board_list = JSON.parse(message);
+	//list_sounds.on('message', function (message) {
+		//board_list = JSON.parse(message);
 		//console.log(board_list);
+	//});
+	PythonShell.run('handleSearch.py', options, function (err,result) {
+		console.log('finished');
+		console.log(result);
+		board_list = JSON.parse(result[0]);
+		console.log(board_list[0]);
+		message.author.send(board_list[0]['title']);
 	});
 }
 
@@ -37,7 +44,7 @@ module.exports = {
 		}
 
 		// Send search results to discord:
-		handleSearch(args);
+		handleSearch(args, message);
 	}
 }
 console.log(board_list);
