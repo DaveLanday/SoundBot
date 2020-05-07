@@ -1,5 +1,6 @@
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 const { PythonShell } = require('python-shell');
+var board_list;
 function handleSearch(keyword) {
 	var options = {
 		mode: 'text',
@@ -9,10 +10,11 @@ function handleSearch(keyword) {
 	var list_sounds = new PythonShell('handleSearch.py', options);
 
 	list_sounds.on('message', function (message) {
-		let bl = JSON.parse(message);
+		board_list = JSON.parse(message);
+		//console.log(board_list);
 	});
-	return bl;
 }
+
 module.exports = {
 	name: "search",
 	category:"search",
@@ -35,7 +37,7 @@ module.exports = {
 		}
 
 		// Send search results to discord:
-		board_list = handleSearch(args);
-
+		handleSearch(args);
 	}
 }
+console.log(board_list);
