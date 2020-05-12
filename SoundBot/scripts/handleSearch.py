@@ -19,7 +19,7 @@ def main():
     elif len(keyword) == 1:
         keyword = args.k[0]
     else:
-        return
+        keyword=''
     search_results = json.dumps(find_boards(keyword))
     print(search_results)
     return search_results
