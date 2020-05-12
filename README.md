@@ -37,18 +37,18 @@ Add bot commands to the commands directory within the `SoundBot` project directo
 
 # TODO:
  
- 1 Figure out pagination after search (so far can only scrape the 1st page) [Future]
+ **1** Figure out pagination after search (so far can only scrape the 1st page) [Future]
  
- 2 ~~Build pipeline to get the data objects we need with python~~, ~~pass dictionaries as json objects to JS ...~~ [complete]
+ **2** ~~Build pipeline to get the data objects we need with python~~, ~~pass dictionaries as json objects to JS ...~~ [complete]
  
- 3 ~~use JS to use those dictionaries to make requests.~~ Add `PythonShell()` call to the `on_board_selection()` function to get specific tracklist when a board is selected.
+ **3** ~~use JS to use those dictionaries to make requests.~~ Add `PythonShell()` call to the `on_board_selection()` function to get specific tracklist when a board is selected.
  
- 4 ~~Front End design and functionality~~ [complete]
+ **4** ~~Front End design and functionality~~ [complete]
  
- 5 Clear emoji cache in private DM to edit the embed message when the '✅' react is selected.
+ **5** Clear emoji cache in private DM to edit the embed message when the '✅' react is selected.
  
- 6 When `handleSearch.py` is triggered, we need to handle when the users search returns null, or there are no existing soundboards which match the query.
+ **6** When `handleSearch.py` is triggered, we need to handle when the users search returns null, or there are no existing soundboards which match the query.
  
- 7 Host bot on Heroku and/or Zeit
+ **7** Host bot on Heroku and/or Zeit
  
- 8 Connect bot to discord
+ **8** Connect bot to discord
