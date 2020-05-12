@@ -47,10 +47,8 @@ Add bot commands to the commands directory within the `SoundBot` project directo
  
  5 Clear emoji cache in private DM to edit the embed message when the '✅' react is selected.
  
- 6. When `handleSearch.py` is triggered, we need to handle when the users search returns null, or there are no existing soundboards which match the query.
+ 6 When `handleSearch.py` is triggered, we need to handle when the users search returns null, or there are no existing soundboards which match the query.
  
- 5 Host bot on Heroku and/or Zeit
+ 7 Host bot on Heroku and/or Zeit
  
- 6 Connect bot to discord
- 
- 7 Impress Chris, Graeme, Fran, Danny, and Kyle!
+ 8 Connect bot to discord
