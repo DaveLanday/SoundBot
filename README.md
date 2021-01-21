@@ -51,4 +51,4 @@ Add bot commands to the commands directory within the `SoundBot` project directo
  
  **7** Host bot on Heroku and/or Zeit
  
- **8** Connect bot to discord
+ **8** ~~Connect bot to discord~~
