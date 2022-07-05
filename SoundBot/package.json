@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/DaveLanday/SoundBot#readme",
   "dependencies": {
-    "@discordjs/opus": "^0.3.3",
+    "@discordjs/opus": "^0.8.0",
     "ascii-table": "0.0.9",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
